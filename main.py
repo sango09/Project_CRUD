@@ -96,3 +96,7 @@ if __name__ == "__main__":
 
         else:
             print("Command Invalid")
+
+#cambio xd
+
+print("3")
