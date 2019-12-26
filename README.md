@@ -1,2 +1,2 @@
 # Project_Platzi_Ventas
-Desarrollo del proyecto:  Platzi Ventas con lineas de comandos, la cual nos va a servir para manejar clientes, ventas, inventarios y generar algunos reportes.
+Project development Platzi Ventas : with command lines, which will help us manage clients, sales, inventories and generate some reports
