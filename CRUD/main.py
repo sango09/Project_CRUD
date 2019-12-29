@@ -27,8 +27,7 @@ def add_client(client):
 
     else:
         print("")
-        print("The client {} was already created".format(
-            client).center(50, "*"))
+        print("Client already in client\'s list".center(50,"*"))
 
 # all clients
 
@@ -37,7 +36,7 @@ def list_clients():
 
     for idx, client in enumerate(clients):
         print("")
-        print("Idx | Name | Company | Email | Position")
+        print("uid | Name | Company | Email | Position")
         print("")
         print("{uid} | {name} | {company} | {email} | {position}".format(
 
@@ -53,51 +52,33 @@ def list_clients():
 def search_client(client_name):
 
     for client in clients:
-        if client != client_name:
+        if client["name"] != client_name:
             continue
         else:
             return True
 
 
-def _update_client(client):
+def update_client(client_id, updated_client):
+    global clients
+
+    if len(clients) - 1 >= client_id:
+        clients[client_id] = updated_client
+    else:
+        print("Client not in clien\'s list")
+
+
+def delete_client(client_id):
     global clients
 
     for idx, client in enumerate(clients):
-
-        if idx in clients:
-            clients.pop(idx)
-            client = {
-                "name": _get_client_field("name"),
-                "company": _get_client_field("company"),
-                "email": _get_client_field("email"),
-                "position": _get_client_field("position")
-            }
-            clients.append(client)
-            print("")
-            print("Update Client".center(50, "*"))
-            print("")
-            list_clients()
-        else:
-            print("")
-            print("The client does not exist")
-
-
-def delete_client(client_name):
-
-    if client_name in clients:
-        clients.remove(client_name)
-        print("")
-        print("Client Removed".center(50, "*"))
-
-    else:
-        print("")
-        print("The client {} is not in clients list".format(
-            client_name).center(50, "*"))
+        if idx == client_id:
+            del clients[idx]
+            break
 
 # get client name
 
 
-def _get_client_field(field_name):
+def _get_client_field(field_name, message = "What is the client {}?."):
     field = None
 
     while not field:
@@ -106,18 +87,14 @@ def _get_client_field(field_name):
     return field
 
 
-def _get_client_name():
-    client = None
+def _get_client_from_user():
+    client = {
+        "name": _get_client_field("name"),
+        "company": _get_client_field("company"),
+        "email": _get_client_field("email"),
+        "position": _get_client_field("position"),
+    }
 
-    while not client:
-        client = input("What is the client name? ")
-
-        if client == "exit":
-            client_name = None
-            break
-
-    if not client:
-        sys.exit()
     return client
 
 
@@ -142,14 +119,8 @@ def run():
         if command == "C":
             print("CREATE CLIENT".center(50, "="))
             print("")
+            client = _get_client_from_user()
 
-            client = {
-                "name": _get_client_field("name"),
-                "company": _get_client_field("company"),
-                "email": _get_client_field("email"),
-                "position": _get_client_field("position"),
-
-            }
             add_client(client)
             list_clients()
 
@@ -157,22 +128,20 @@ def run():
             print("UPDATE CLIENT".center(50, "="))
             print("")
 
-            client = {
-                "name": _get_client_field("name"),
-            }
-            _update_client(client)
+            client_id = int(_get_client_field("id"))
+            updated_client = _get_client_from_user()
+
+            update_client(client_id, updated_client)
+            list_clients()
 
         elif command == "L":
             print("LIST CLIENT\'S".center(50, "="))
             list_clients()
 
         elif command == "D":
-            print("DELETE CLIENT".center(50, "="))
-            print("")
+            cliend_id = int(_get_client_field("id"))
 
-            client_name = _get_client_name()
-            delete_client(client_name)
-
+            delete_client(cliend_id)
             print("")
             list_clients()
 
@@ -180,7 +149,7 @@ def run():
             print("SEARCH CLIENT".center(50, "="))
             print("")
 
-            client_name = _get_client_name()
+            client_name = _get_client_field("name")
             found = search_client(client_name)
 
             if found:
