@@ -1,7 +1,7 @@
 import sys
 
 
-clients = ["pablo", "ricardo", ]
+clients = ["pablo", "ricardo"]
 
 
 def add_client(client_name):
@@ -17,11 +17,13 @@ def add_client(client_name):
         print("The client {} was already created".format(
             client_name).center(50, "*"))
 
-#all clients
-def list_clients():
-    global clients
+# all clients
 
-    print(clients)
+
+def list_clients():
+
+    for idx, client in enumerate(clients):
+        print("index {} : {}".format(idx, client))
 
 
 def search_client(client_name):
@@ -49,6 +51,7 @@ def _update_client(client_name):
         print("The client {} does not exist".format(
             client_name).center(50, "*"))
 
+
 def delete_client(client_name):
     global clients
 
@@ -62,7 +65,8 @@ def delete_client(client_name):
         print("The client {} is not in clients list".format(
             client_name).center(50, "*"))
 
-#get client name
+# get client name
+
 
 def _get_client_name():
     client_name = None
@@ -95,7 +99,8 @@ def run():
         : """))
 
         command = command.upper()
-#command lines
+# command lines
+
         if command == "C":
             print("CREATE CLIENT".center(50, "="))
             print("")
@@ -153,10 +158,11 @@ def run():
         else:
             print("Command invalid")
 
-#print welcome message
+# print welcome message
+
+
 if __name__ == "__main__":
     print("WELCOME TO PLATZI VENTAS".center(50, "="))
     run()
 
-#Santiago Gomez Florez 
-#prueba
+# Santiago Gomez Florez
