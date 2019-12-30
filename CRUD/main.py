@@ -164,10 +164,10 @@ def run():
 
             if found:
                 print("")
-                print("The client: {} is in the client\'s list".format(client_name))
+                print("The client: {} is in the client\'s list".format(client_name).center(50,"."))
             else:
                 print("")
-                print("The client: {} is not in our client\'s list".format(client_name))
+                print("The client: {} is not in our client\'s list".format(client_name).center(50,"."))
 
         elif command == "E":
             print("GOOD BYE".center(50, "="))
